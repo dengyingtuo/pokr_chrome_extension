@@ -1,0 +1,239 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'),
+       local('Roboto-Regular'),
+       url(http://themes.googleusercontent.com/static/fonts/roboto/v11/2UX7WLTfW3W8TclTUvlFyQ.woff)
+       format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'),
+       local('Roboto-Bold'),
+       url(http://themes.googleusercontent.com/static/fonts/roboto/v11/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff)
+       format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Roboto Italic'),
+       local('Roboto-Italic'),
+       url(http://themes.googleusercontent.com/static/fonts/roboto/v11/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff)
+       format('woff');
+}
+
+
+* {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-size: 18px;
+
+  }
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #ED483E;
+}
+
+#header{
+  width: 900px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: solid;
+  border-bottom: solid;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+
+.bar_left {
+  float:left;
+}
+
+.bar_right {
+  float:right;
+}
+
+#content_wrapper {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#content {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#footer {
+  width: 900px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: solid;
+  border-bottom: solid;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+
+.objective_description {
+  max-width: 800px;
+  color: #ED483E;
+  border-bottom: solid;
+  border-bottom-color: #000000;
+}
+
+.objective_date {
+  float:right;
+  color: #ED483E;
+
+}
+
+.keyresult_index_input {
+  width: 30px;
+  border: none;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  text-align: right;
+}
+
+textarea:focus, input:focus {
+    color: #ED483E;
+    outline: 0;
+}
+
+#homepage_submit {
+  background: none;
+  border:2px solid #000000;
+  width: 800px;
+  margin-top: 15px;
+  color: #ED483E;
+}
+
+.settings_input {
+  background: none;
+  border:2px solid #000000;
+  margin: 15px;
+}
+
+.submit {
+  background: none;
+  border:2px solid #000000;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #ED483E;
+}
+
+.title {
+  color: #ED483E;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.objectives_description_input {
+  background: none;
+  border:2px solid #000000;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  min-width: 600px;
+}
+
+.objectives_due_input {
+  background: none;
+  border:2px solid #000000;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.keyresult_goal_input {
+  border: none;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  width: 25px;
+}
+
+.keyresult_unit_input {
+  border: none;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  width: 200px;
+}
+.keyresult_action_input {
+  border: none;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  width: 570px;
+}
+.keyresult_delete {
+  border: none;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+  width: 5px;
+}
+
+.add{
+  float: right;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.new_key_result{
+  background: none;
+  border:2px solid #000000;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+}
+
+select {
+  background: none;
+  border: none;
+  outline: 2px inset black;
+  outline-offset:-1px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+
+
+
+#construction_face{
+  font-size: 100px;
+  margin-top: 200px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 5px;
+  text-align: center;
+}
+#construction_text{
+  font-size: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 200px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
