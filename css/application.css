@@ -78,7 +78,7 @@ a:hover {
   padding-bottom: 15px;
 }
 
-#content {
+#POKRs {
   margin-left: auto;
   margin-right: auto;
 }
@@ -106,7 +106,6 @@ a:hover {
 .objective_date {
   float:right;
   color: #ED483E;
-
 }
 
 .keyresult_index_input {
@@ -171,7 +170,7 @@ textarea:focus, input:focus {
   border: none;
   border-bottom: solid;
   border-bottom-width: 1px;
-  width: 25px;
+  width: 75px;
 }
 
 .keyresult_unit_input {
@@ -184,13 +183,19 @@ textarea:focus, input:focus {
   border: none;
   border-bottom: solid;
   border-bottom-width: 1px;
-  width: 570px;
+  width: 520px;
 }
 .keyresult_delete {
   border: none;
-  border-bottom: solid;
-  border-bottom-width: 1px;
   width: 5px;
+}
+
+#keyresult_settings_submit{
+  background: none;
+  border:2px solid #000000;
+  width: 800px;
+  margin-top: 15px;
+  color: #ED483E;
 }
 
 .add{
@@ -242,3 +247,7 @@ select {
   text-align: center;
 }
 
+.objdesc {
+  float:left;
+  color: #ED483E;
+}

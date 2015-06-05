@@ -1,6 +1,3 @@
-/*
-
-
 
 var loadPOKRS = function(){
   chrome.storage.sync.get('objectives_array', function(stored_obj){
@@ -18,39 +15,145 @@ var loadPOKRS = function(){
             objectivesArray[i]['description'],
             "<div class=\"objective_date\">",
             objectivesArray[i]['due_date'],
+            "</div></td></tr>"
           );
-          $('#content').append
+          $('#POKRs').append(objectiveHTMLString);
           for (var j = 0; j < objectivesArray[i]['keyresults_array'].length; j++){
-
+            keyresultHTMLString = "";
+            keyresultHTMLString = keyresultHTMLString.concat(
+              "<tr><td><input class=\"keyresult_index_input obj",
+              i, " kr", j,
+              "\" type=\"text\" value=\"",
+              objectivesArray[i]['keyresults_array'][j]['value'],
+              "\">/",
+              objectivesArray[i]['keyresults_array'][j]['goal'],
+              "   ",
+              objectivesArray[i]['keyresults_array'][j]['unit'],
+              " ",
+              objectivesArray[i]['keyresults_array'][j]['action'],
+              "</td></tr>"
+            );
+            $('#POKRs').append(keyresultHTMLString);
           };
         };
-
+        $('#POKRs').append("<tr><td><input id=\"homepage_submit\" type=\"submit\" value=\"Update POKRs\" ></tr></td>")
       });
     };
-
+  });
 };
 
 
-<table id="content">
-  <% @objectives.each_with_index do |objective, index|%>
-    <tr><td class="objective_description"><%= objective.description %><div class="objective_date"><%= objective.due.strftime('%b %e, %Y') %></div></td></tr>
-    <% @keyresults[index].each do |keyresult|%>
-      <tr><td><input class="keyresult_index_input" name="<%= keyresult.id %>" type="text" value="<%= keyresult.number %>" ></input> /<%= keyresult.goal %>  <%= keyresult.unit %> <%= keyresult.action %></td></tr>
-    <% end %>
-    <tr><td> &nbsp; </td></tr>
-  <% end %>
-  <input type="hidden" name="_method" value="put"/>
-  <tr><td><input id="homepage_submit" type="submit" value="Update POKRs" ></tr></td>
-</table>
+var updatePOKRs = function(){
+  chrome.storage.sync.get('objectives_array', function(stored_obj){
+    if (!stored_obj['objectives_array']){
+      $('.content_wrapper').load( '../src/new_user.html' );
+    }
+    else{
+      objectivesArray = stored_obj['objectives_array'];
+      for (var i = 0; i < objectivesArray.length; i++){
+        for (var j = 0; j < objectivesArray[i]['keyresults_array'].length; j++){
+          objectivesArray[i]['keyresults_array'][j]['value'] = $(".obj" + i + ", " + ".kr" + j).val()
+        };
+      };
+      chrome.storage.sync.set({'objectives_array': objectivesArray}, function(){
+        loadPOKRS();
+      });
+    };
+  });
+}
 
-*/
 
+var loadKeyresultsSettings = function () {
+  chrome.storage.sync.get('objectives_array', function(stored_obj){
+    if (!stored_obj['objectives_array']){
+      $('.content_wrapper').load( '../src/new_user.html' );
+    }
+    else{
+      objectivesArray = stored_obj['objectives_array'];
+      $('.content_wrapper').load( '../src/settings/keyresults.html', function(){
+        for (var i = 0; i < objectivesArray.length; i++){
+          objectiveHTMLString = "";
+          objectiveHTMLString = objectiveHTMLString.concat(
+            "<tr><td class=\"objective_description\"><div class=\"objdesc\" id=\"", i, "\">", objectivesArray[i]['description'],"</div>",
+            "<div class=\"objective_date\" id=\"", i, "\">",
+            objectivesArray[i]['due_date'],
+            "</div></td></tr>"
+          );
+          $('#POKRs').append(objectiveHTMLString);
+          for (var j = 0; j < objectivesArray[i]['keyresults_array'].length; j++){
+            keyresultHTMLString = "";
+            keyresultHTMLString = keyresultHTMLString.concat(
+              "<tr><td>",
+              "<div id=\"update_keyresult_row", i, j, "\">",
+              "<input type=\"hidden\" class=\" keyresult_goal_input obj", i, " kr", j, "\">",
+              "<input class=\"keyresult_goal_input obj", i, " kr", j, "\" type=text value=\"", objectivesArray[i]['keyresults_array'][j]['goal'], "\">",
+              "<input class=\"keyresult_unit_input obj", i, " kr", j, "\" type=text value=\"", objectivesArray[i]['keyresults_array'][j]['unit'], "\">",
+              "<input class=\"keyresult_action_input obj", i, " kr", j, "\" type=text value=\"", objectivesArray[i]['keyresults_array'][j]['action'], "\">",
+              "<a class=\"keyresult_delete\" id=\"",i,j,"\">X</a>",
+              "</div>",
+              "</td></tr>"
+            );
+            $('#POKRs').append(keyresultHTMLString);
+          };
+        };
+        $('#POKRs').append("<tr><td><input id=\"keyresult_settings_submit\" type=\"submit\" value=\"Save key results\" ></tr></td>");
+      });
+    };
+  });
+}
 
+var updateKeyresultSettings = function(){
+  chrome.storage.sync.get('objectives_array', function(stored_obj){
+    if (!stored_obj['objectives_array']){
+      $('.content_wrapper').load( '../src/new_user.html' );
+    }
+    else{
+      objectivesArray = [];
+      for (var i = 0; i < $('.objective_description').length; i++){
+        newObjective = {
+          description: $(".objdesc")[i].textContent,
+          due: $(".objective_date")[i].textContent
+        }
+        newKeyResultArray = [];
+        for (var j = 0; j < $('.keyresult_goal_input').length; j++){
+          newKeyResult = {
+            value: $('.keyresult_value_input .obj' + i).val(),
+            goal: $('.keyresult_goal_input .obj' + i).val(),
+            unit: $('.keyresult_unit_input .obj' + i).val(),
+            action: $('.keyresult_action_input .obj' + i).val()
+          };
+          newKeyResultArray.push(newKeyResult);
+        };
+        newObjective.keyresultsArray = newKeyResultArray;
+        objectivesArray.push(newObjective);
+      };
+      chrome.storage.sync.set({'objectives_array': objectivesArray}, function(){
+        loadPOKRS();
+      });
+    };
+  });
+}
 
-
-
-
-
+var updateKeyresultsSettings = function () {
+  chrome.storage.sync.get('objectives_array', function(stored_obj){
+    if (!stored_obj['objectives_array']){
+      $('.content_wrapper').load( '../src/new_user.html' );
+    }
+    else{
+      objectivesArray = stored_obj['objectives_array'];
+      for (var i = 0; i < objectivesArray.length; i++){
+        for (var j = 0; j < objectivesArray[i]['keyresults_array'].length; j++){
+          objectivesArray[i]['keyresults_array'][j]['goal'] = $(".keyresult_goal_input .obj" + i + ", " + ".kr" + j).val();
+          objectivesArray[i]['keyresults_array'][j]['unit'] = $(".keyresult_goal_input .obj" + i + ", " + ".kr" + j).val();
+          objectivesArray[i]['keyresults_array'][j]['action'] = $(".keyresult_goal_input .obj" + i + ", " + ".kr" + j).val();
+        };
+      };
+      chrome.storage.sync.set({'objectives_array': objectivesArray}, function(){
+        loadPOKRS();
+      });
+    };
+  });
+};
 
 
 
@@ -90,21 +193,26 @@ var loadPOKRS = function(){
 
 $( document ).ready( function(){
 
+  loadPOKRS();
+
 // JQuery for navbars
 
   $('#settings').on('click', function(){
     $('.content_wrapper').load( '../src/settings/index.html' );
-    $('#head').focus();
   });
 
   $('#home').on('click', function(){
-
+    loadPOKRS()
   });
 
   $('#about').on('click', function(){
     chrome.storage.sync.clear(function(){
       console.log("Memory cleared");
     })
+  });
+
+  $('.content_wrapper').on('click', '#homepage_submit', function(){
+    updatePOKRs();
   });
 
 
@@ -201,9 +309,7 @@ $('.content_wrapper').on('click', '#update_objectives_submit', function(){
 });
 
 $('.content_wrapper').on('click', '.objective_delete', function(){
-  console.log("This worked");
   var id = $(this).attr('id');
-  console.log(id);
   $('#update_objective_row' + id).remove();
 });
 
@@ -234,11 +340,24 @@ $('.content_wrapper').on('click', '.objective_delete', function(){
 
   });
 
-
-
 // JQuery for key results settings
+$('.content_wrapper').on('click', '#keyresults', function(){
+  console.log("this ran");
+  loadKeyresultsSettings();
+});
 
-  $('.content_wrapper').on('click', '#new_keyresult_nav', function(){
+$('.content_wrapper').on('click', '.objective_delete', function(){
+  var id = $(this).attr('id');
+  console.log(id);
+  $('#update_objective_row' + id).remove();
+});
+
+
+
+
+// JQuery for new key results
+
+  $('.content_wrapper').on('click', '#new_keyresult_add', function(){
     chrome.storage.sync.get('objectives_array', function(stored_obj){
       if (!stored_obj['objectives_array']){
         $('.content_wrapper').load( '../src/settings/new_keyresult_error.html')
@@ -268,6 +387,7 @@ $('.content_wrapper').on('click', '.objective_delete', function(){
       var objectiveID = $('#key_result_objective_selector').val();
 
       var newKeyResult = {
+        value: 0,
         goal: $('#goal_submit').val(),
         unit: $('#unit_submit').val(),
         action: $('#action_submit').val()
@@ -281,6 +401,21 @@ $('.content_wrapper').on('click', '.objective_delete', function(){
       });
     });
   });
+
+  $('.content_wrapper').on('click', '.keyresult_delete', function(){
+    console.log("keyresult delete");
+    var id = $(this).attr('id');
+    console.log(id);
+    $('#update_keyresult_row' + id).remove();
+  });
+
+  $('.content_wrapper').on('click', '#keyresult_settings_submit', function(){
+    console.log("keyresult update");
+    updateKeyresultSettings();
+  });
+
+
+
 });
 
 
