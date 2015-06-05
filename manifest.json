@@ -18,6 +18,7 @@
     "newtab": "/src/index.html"
   },
   "content_scripts" : [ {
+    "matches": ["http://*/*"],
      "js": [ "/js/jquery/jquery.min.js"]
    }]
 }

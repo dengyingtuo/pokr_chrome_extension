@@ -70,7 +70,7 @@ a:hover {
   float:right;
 }
 
-#content_wrapper {
+.content_wrapper {
   width: 900px;
   margin-left: auto;
   margin-right: auto;
@@ -216,7 +216,12 @@ select {
   margin-bottom: 15px;
 }
 
-
+.objective_delete{
+  float: right;
+  background: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
 
 #construction_face{
